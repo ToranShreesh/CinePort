@@ -77,3 +77,16 @@
 - Organized admin functionalities and page navigation flow
 - Completed major frontend implementation of the movie booking application
 - Started preparation for backend development using Node.js and MongoDB APIs
+
+### Day 10
+- Created separate server folder structure for backend development
+- Initialized backend setup using Node.js and Express.js
+- Created MongoDB Atlas account and configured database cluster
+- Added environment configuration using .env file
+- Configured MongoDB connection URI securely using environment variables
+- Created database connection configuration file (configs/db.js) using Mongoose
+- Configured main backend server file (server.js) with middleware and routing setup
+- Added CORS and JSON parsing middleware configuration
+- Connected backend server with MongoDB database
+- Added basic test route for backend API setup
+- Prepared backend structure for upcoming API development and MERN stack integration
