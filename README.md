@@ -102,3 +102,9 @@
 - Implemented automatic user update sync from Clerk to MongoDB
 - Created inngest/index.js for event-driven background functions
 - Prepared backend user management workflow for scalable API integration
+
+### Day 12
+- Deployed backend server to Vercel
+- Added deployment configuration and setup inside the server folder for production
+- Synced and connected Vercel deployment with Inngest
+- Configured backend event handling and deployment environment for Inngest functions
