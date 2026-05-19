@@ -90,3 +90,15 @@
 - Connected backend server with MongoDB database
 - Added basic test route for backend API setup
 - Prepared backend structure for upcoming API development and MERN stack integration
+
+### Day 11
+- Integrated Clerk authentication in backend server
+- Created User.js model using Mongoose
+- Configured Clerk webhooks for backend user synchronization
+- Created Inngest account and completed backend setup
+- Connected Inngest with Clerk events handling
+- Implemented automatic user creation sync from Clerk to MongoDB
+- Implemented automatic user deletion sync from Clerk to MongoDB
+- Implemented automatic user update sync from Clerk to MongoDB
+- Created inngest/index.js for event-driven background functions
+- Prepared backend user management workflow for scalable API integration
