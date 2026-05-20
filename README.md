@@ -108,3 +108,17 @@
 - Added deployment configuration and setup inside the server folder for production
 - Synced and connected Vercel deployment with Inngest
 - Configured backend event handling and deployment environment for Inngest functions
+- Connected MongoDB, Clerk, and Inngest in backend
+- Created Movie and Show database models
+- Built getNowPlayingMovies API to fetch currently playing movies from TMDB
+- Developed addShow API for admins to add multiple movie shows
+
+### Day 13
+- Implemented automatic movie creation from TMDB when movie data is missing in database
+- Fetched movie details and credits using Promise.all()
+- Added bulk show insertion using Show.insertMany()
+- Implemented basic error handling and standardized API responses
+- Created showRouter with /now-playing and /add endpoints
+- Applied protectAdmin middleware for admin-only routes
+- Organized routes into Public and Admin sections with comments
+- Created middleware folder and auth.js for admin authentication and route protection
