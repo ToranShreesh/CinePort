@@ -122,3 +122,9 @@
 - Applied protectAdmin middleware for admin-only routes
 - Organized routes into Public and Admin sections with comments
 - Created middleware folder and auth.js for admin authentication and route protection
+
+### Day 14
+- Created API to fetch all movie shows from the database
+- Created API to fetch a single show by ID from the database
+- Tested both APIs successfully in Postman
+- Verified API responses and database integration working correctly
