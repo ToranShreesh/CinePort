@@ -128,3 +128,9 @@
 - Created API to fetch a single show by ID from the database
 - Tested both APIs successfully in Postman
 - Verified API responses and database integration working correctly
+- Created Booking Schema / Booking Model for storing booking data
+- Created bookingController.js for booking-related business logic
+- Implemented functionality to check availability of selected seats for a movie show
+- Added API logic to create new bookings
+- Implemented seat validation to prevent duplicate seat booking conflicts
+- Created booking routes for handling booking APIs
