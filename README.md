@@ -144,3 +144,10 @@
 - Created adminRoutes.js to manage all admin-related API endpoints
 - Organized admin routes and controller structure for scalable backend management
 - Improved backend role-based access workflow for admin functionalities
+- Created userController.js for handling user-related backend operations
+- Implemented API Controller Function to fetch user bookings history
+- Built API Controller Function to update favourite movies in Clerk user metadata
+- Created API to fetch favourite movies from the database
+- Created userRoutes.js to manage all user-related API endpoints
+- Added routes and endpoints for user controller APIs
+- Organized backend structure for better scalability and modular API management
