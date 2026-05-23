@@ -134,3 +134,13 @@
 - Added API logic to create new bookings
 - Implemented seat validation to prevent duplicate seat booking conflicts
 - Created booking routes for handling booking APIs
+
+### Day 15
+- Created adminController.js for handling admin-related backend operations
+- Implemented API to check whether the logged-in user has admin access
+- Built API to fetch admin dashboard data and statistics
+- Created API to retrieve all movie shows for admin management
+- Created API to retrieve all bookings for admin monitoring and management
+- Created adminRoutes.js to manage all admin-related API endpoints
+- Organized admin routes and controller structure for scalable backend management
+- Improved backend role-based access workflow for admin functionalities
