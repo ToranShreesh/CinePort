@@ -151,3 +151,17 @@
 - Created userRoutes.js to manage all user-related API endpoints
 - Added routes and endpoints for user controller APIs
 - Organized backend structure for better scalability and modular API management
+
+### Day 16
+- Created global App Context using React Context API
+- Configured Axios and installed it for API handling
+- Set Axios base URL using Vite environment variables
+- Implemented admin authentication and route protection
+- Connected frontend with backend APIs
+- Added API integration for shows and favourite movies
+- Managed global states for admin, shows, and favourites
+- Implemented automatic data fetching using useEffect
+- Added Clerk token authorization handling
+- Created reusable custom context hook for app-wide access
+- Integrated toast notifications for error handling
+- Integrated AppProvider with BrowserRouter and ClerkProvider
