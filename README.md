@@ -165,3 +165,10 @@
 - Created reusable custom context hook for app-wide access
 - Integrated toast notifications for error handling
 - Integrated AppProvider with BrowserRouter and ClerkProvider
+
+### Day 17
+- Integrated admin state management using App Context
+- Implemented admin authorization check in Layout component
+- Added protected admin dashboard rendering
+- Implemented loading state for admin authentication validation
+- Configured admin layout with nested routing using Outlet

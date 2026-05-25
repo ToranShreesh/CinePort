@@ -4,17 +4,27 @@ import Loading from '../../components/Loading';
 import Title from '../../components/admin/Title';
 import { CheckIcon, DeleteIcon, StarIcon } from 'lucide-react'
 import { kConverter } from '../../lib/kConverter';
+import { useAppContext } from '../../context/appContext';
 
 const AddShows = () => {
-   const currency = import.meta.env.VITE_CURRENCY
-   const [nowPlayingMovie, setNowPlayingMovie] = useState([]);
-   const [selectedMovie, setSelectedMovie] = useState(null);
-   const [dateTimeSelection, setDateTimeSelection] = useState({});
-   const [dateTimeInput, setDateTimeInput] = useState("");
-   const [showPrice, setShowPrice] = useState("");
+
+  const {axios, getToken, user} = useAppContext()
+  const currency = import.meta.env.VITE_CURRENCY
+  const [nowPlayingMovie, setNowPlayingMovie] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [dateTimeSelection, setDateTimeSelection] = useState({});
+  const [dateTimeInput, setDateTimeInput] = useState("");
+  const [showPrice, setShowPrice] = useState("");
 
    const fetchNowPlayingMovies = async ()=> {
-    setNowPlayingMovie(dummyShowsData)
+    try {
+      const {data} = await axios.get('/api/show/now-playing', 
+        {headers: {Authorization: `Bearer ${await getToken()}`}})
+        if(data.success) {
+          setNowPlayingMovie(data.movies)
+        }
+    } catch (error) {
+    }
    };
 
    const handleDateTimeAdd = () => {
