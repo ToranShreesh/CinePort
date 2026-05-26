@@ -3,10 +3,38 @@ import Show from "../models/Show.js";
 import User from "../models/User.js"
 
 // API to check if user is admin
-export const isAdmin = async (req,res) => {
-    res.json({success: true, isAdmin: true})
-}
+export const isAdmin = async (req, res) => {
+    try {
+        const { userId } = req.auth();
 
+        if (!userId) {
+            return res.json({ success: true, isAdmin: false });
+        }
+
+        const user = await clerkClient.users.getUser(userId);
+
+        // Check Private Metadata
+        const isAdminUser = user.privateMetadata?.role === "admin";
+
+        console.log("User Role Check:", {   // For debugging
+            userId, 
+            role: user.privateMetadata?.role,
+            isAdmin: isAdminUser 
+        });
+
+        res.json({ 
+            success: true, 
+            isAdmin: isAdminUser 
+        });
+
+    } catch (error) {
+        console.error("isAdmin Error:", error.message);
+        res.json({ 
+            success: true, 
+            isAdmin: false 
+        });
+    }
+};
 // API to get dashboard data
 export const getDashboardData = async (req,res) => {
     try {

@@ -36,7 +36,6 @@ const App = () => {
         <Route path='/admin/*' element={user ? <Layout/> : (
           <div className='min-h-screen flex justify-center items-center'>
             <SignIn fallbackRedirectUrl={'/admin'}/>
-
           </div>
         )}>
           <Route index element={<Dashboard/>}/>

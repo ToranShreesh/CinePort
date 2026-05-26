@@ -4,12 +4,12 @@ import { clerkClient } from "@clerk/express";
 import Movie from "../models/Movie.js";
 
 // API Controller Function to Get User Bookings
-export const getUserBookings = async(req, res) => {
+export const getUserBookings = async (req, res) => {
     try {
         const user = req.auth().userId;
 
         const bookings = await Booking.find({user}).populate({
-            path: "Show",
+            path: "show",
             populate: {path:"movie"}
         }).sort({createdAt: -1})
         res.json({success: true, bookings})
@@ -21,29 +21,29 @@ export const getUserBookings = async(req, res) => {
     }
 }
 
-// API Controller Function to Update Favourite Movie in Clerk User Metadata
+// API Controller Function to Update Favorite Movie in Clerk User Metadata
 
-export const updateFavourite = async(req, res) => {
+export const updateFavorite = async(req, res) => {
     try {
         const {movieId} = req.body;
         const userId = req.auth().userId;
 
         const user = await clerkClient.users.getUser(userId)
 
-        if(!user.privateMetadata.favourites) {
-            user.privateMetadata.favourites = []
+        if(!user.privateMetadata.favorites) {
+            user.privateMetadata.favorites = []
         }
 
-        if(!user.privateMetadata.favourites.includes(movieId)) {
-            user.privateMetadata.favourites.push(movieId)
+        if(!user.privateMetadata.favorites.includes(movieId)) {
+            user.privateMetadata.favorites.push(movieId)
         } else{
-            user.privateMetadata.favourites = user.privateMetadata.favourites.filter
+            user.privateMetadata.favorites = user.privateMetadata.favorites.filter
             (item => item !== movieId)
         }
 
         await clerkClient.users.updateUserMetadata(userId, {privateMetadata: user.privateMetadata})
 
-        res.json({success:true, message:'Favourite updated successfully'})
+        res.json({success:true, message:'Favorite updated successfully'})
     
     } catch (error) {
         console.error(error.message);
@@ -52,15 +52,15 @@ export const updateFavourite = async(req, res) => {
     }
 }
 
-// API to get Favourite Movies from the database
+// API to get Favorite Movies from the database
 
-export const getFavourite = async (req, res) => {
+export const getFavorites = async (req, res) => {
     try {
-        const user = await clerkClient.users.getUser(userId)
-        const favourites = user.privateMetadata.favourites;
+        const user = await clerkClient.users.getUser(req.auth().userId)
+        const favorites = user.privateMetadata.favorites;
 
         // Getting movies from database
-        const movies = await Movie.find({_id: {$in: favourites}})
+        const movies = await Movie.find({_id: {$in: favorites}})
 
         res.json({success: true, movies})
         
