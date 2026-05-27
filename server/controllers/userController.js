@@ -56,17 +56,27 @@ export const updateFavorite = async(req, res) => {
 
 export const getFavorites = async (req, res) => {
     try {
-        const user = await clerkClient.users.getUser(req.auth().userId)
-        const favorites = user.privateMetadata.favorites;
+        const { userId } = req.auth();
+
+        // 🔥 Most Important Fix
+        if (!userId) {
+            return res.json({ 
+                success: true, 
+                movies: [] 
+            });
+        }
+
+        const user = await clerkClient.users.getUser(userId);
+        
+        const favorites = user.privateMetadata?.favorites || [];
 
         // Getting movies from database
-        const movies = await Movie.find({_id: {$in: favorites}})
+        const movies = await Movie.find({ _id: { $in: favorites } });
 
-        res.json({success: true, movies})
+        res.json({ success: true, movies });
         
     } catch (error) {
         console.error(error.message);
-        res.json({success: false, message:error.message });
-        
+        res.json({ success: false, message: error.message });
     }
-}
+};
