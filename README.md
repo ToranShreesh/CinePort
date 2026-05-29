@@ -172,3 +172,32 @@
 - Added protected admin dashboard rendering
 - Implemented loading state for admin authentication validation
 - Configured admin layout with nested routing using Outlet
+
+### Day 18
+- Completed full Add Shows functionality integration between frontend and backend
+- Fetched Now Playing movies dynamically from TMDB through backend APIs
+- Displayed movies in Admin Add Shows Page
+- Implemented movie selection workflow for admins
+- Added functionality to select show price, available dates, and show timings
+- Connected frontend form with backend addShow API using Axios
+- Implemented dynamic show creation and insertion into MongoDB database
+- Added admin authorization and protected API access for adding shows
+- Managed loading states and toast notifications during show creation
+- Improved admin show management workflow and frontend-backend data synchronization
+
+### Day 19
+
+- Completed full Admin Dashboard functionality with frontend and backend integration
+- Implemented dashboard statistics APIs and UI integration
+- Added Total Bookings analytics display
+- Added Total Revenue analytics calculation and display
+- Added Active Shows count functionality
+- Added Total Users statistics functionality
+- Completed List Shows management feature for admins
+- Displayed Movie Name, Show Time, Total Bookings, and Earnings dynamically from database
+- Connected List Shows frontend with backend APIs and MongoDB data
+- Completed List Bookings management functionality
+- Displayed User Name, Movie Name, Show Time, Seats, and Booking Amount dynamically
+- Integrated booking management APIs with admin frontend dashboard
+- Improved admin workflow and real-time data rendering from database
+- Completed major admin panel functionalities for movie booking management system

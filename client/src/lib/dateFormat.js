@@ -1,10 +1,9 @@
 export const dateFormat = (date) => {
-    return new Date(date).toLocaleString('en-US',{
+    return new Date(date).toLocaleString('en-US', {
         weekday: 'short',
-        month: 'short',
+        month: 'long',           // June, July, etc.
         day: 'numeric',
-        hours: 'numeric',
+        hour: 'numeric',
         minute: 'numeric'
-
     })
 }
