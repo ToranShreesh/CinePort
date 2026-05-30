@@ -1,12 +1,11 @@
 import express from 'express';
-import { getFavorites, getUserBookings, updateFavorite } from '../controllers/userController.js';
+import { protectRoute } from '../middleware/auth.js';
+import { updateFavorite, getFavorites, getUserBookings } from '../controllers/userController.js';
 
+const router = express.Router();
 
+router.post('/update-favorite', protectRoute, updateFavorite);
+router.get('/favorites', protectRoute, getFavorites);
+router.get('/bookings', protectRoute, getUserBookings);
 
-const userRouter = express.Router();
-
-userRouter.get('/bookings', getUserBookings)
-userRouter.post('/update-favorite', updateFavorite )
-userRouter.get('/favorites', getFavorites)
-
-export default userRouter;
+export default router;

@@ -22,35 +22,38 @@ export const getUserBookings = async (req, res) => {
 }
 
 // API Controller Function to Update Favorite Movie in Clerk User Metadata
-
-export const updateFavorite = async(req, res) => {
+export const updateFavorite = async (req, res) => {
     try {
-        const {movieId} = req.body;
-        const userId = req.auth().userId;
+        const { movieId } = req.body;
+        const userId = req.userId;        // ← From middleware
 
-        const user = await clerkClient.users.getUser(userId)
-
-        if(!user.privateMetadata.favorites) {
-            user.privateMetadata.favorites = []
+        if (!userId) {
+            return res.status(401).json({ 
+                success: false, 
+                message: "Unauthorized" 
+            });
         }
 
-        if(!user.privateMetadata.favorites.includes(movieId)) {
-            user.privateMetadata.favorites.push(movieId)
-        } else{
-            user.privateMetadata.favorites = user.privateMetadata.favorites.filter
-            (item => item !== movieId)
+        const user = await clerkClient.users.getUser(userId);
+
+        let favorites = user.privateMetadata?.favorites || [];
+
+        if (favorites.includes(movieId)) {
+            favorites = favorites.filter(id => id !== movieId);
+        } else {
+            favorites.push(movieId);
         }
 
-        await clerkClient.users.updateUserMetadata(userId, {privateMetadata: user.privateMetadata})
+        await clerkClient.users.updateUserMetadata(userId, {
+            privateMetadata: { favorites }
+        });
 
-        res.json({success:true, message:'Favorite updated successfully'})
-    
+        res.json({ success: true, message: 'Favorite updated successfully' });
     } catch (error) {
-        console.error(error.message);
-        res.json({success: false, message:error.message});
-        
+        console.error("Update Favorite Error:", error);
+        res.status(500).json({ success: false, message: error.message });
     }
-}
+};
 
 // API to get Favorite Movies from the database
 

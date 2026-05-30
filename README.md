@@ -200,3 +200,24 @@
 - Integrated booking management APIs with admin frontend dashboard
 - Improved admin workflow and real-time data rendering from database
 - Completed major admin panel functionalities for movie booking management system
+
+### Day 20
+
+- Integrated Home Page with backend movie show data
+- Displayed Now Showing movies dynamically based on shows added by admins
+- Fetched active movie shows from backend APIs and MongoDB database
+- Connected Home Page movie listings with real-time show data
+- Implemented navigation to Movie Details Page when clicking movie posters or Buy Tickets button
+- Completed Movie Details Page data integration with backend APIs
+- Displayed dynamic movie information and details fetched from database
+- Implemented Favourite Movie functionality with frontend and backend integration
+- Added ability to mark movies as favourites using heart icon
+- Updated heart icon state dynamically (red for favourite, gray for non-favourite)
+- Connected favourite movie updates with backend APIs and database storage
+- Implemented Favourite Movies Page to display all user favourite movies
+- Fetched favourite movie data dynamically from backend and database
+- Added conditional rendering for Favourite navigation item
+- Hid Favourite Page link from navbar when no favourite movies exist
+- Improved user experience through dynamic UI updates and state management
+- Completed end-to-end favourite movie workflow including frontend, backend, and database integration
+
