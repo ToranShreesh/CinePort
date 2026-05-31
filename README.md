@@ -221,3 +221,22 @@
 - Improved user experience through dynamic UI updates and state management
 - Completed end-to-end favourite movie workflow including frontend, backend, and database integration
 
+### Day 21
+
+- Completed My Bookings Page with frontend and backend integration
+- Fetched and displayed user booking history dynamically from backend APIs
+- Displayed booked movie details, show information, selected seats, and booking records
+- Integrated My Bookings Page with MongoDB booking data
+- Completed seat booking functionality for movie shows
+- Implemented booking flow using selected date, show timing, and seat selections
+- Connected booking process with backend booking APIs
+- Stored booking information securely in MongoDB database
+- Implemented real-time seat availability management
+- Added validation to prevent double booking of seats
+- Displayed already booked seats as unavailable in the seat layout
+- Disabled interaction for booked seats to prevent duplicate reservations
+- Updated seat status dynamically based on booking data
+- Improved overall booking workflow and user experience
+- Completed end-to-end movie ticket booking functionality from seat selection to booking history
+
+

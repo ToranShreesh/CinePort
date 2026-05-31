@@ -1,83 +1,86 @@
 import Booking from "../models/Booking.js";
 import Show from "../models/Show.js";
 
-
-// Function to check availability of selected seats for a movie
 const checkSeatsAvailability = async (showId, selectedSeats) => {
-    try{
-        const showData = await Show.findById(showId)
-        if(!showData) return false;
+  try {
+    const showData = await Show.findById(showId);
+    if (!showData) return false;
 
-        const occupiedSeats = showData.occupiedSeats;
-
-        const isAnySeatTaken = selectedSeats.some(seat => occupiedSeats[seat]);
-
-        return !isAnySeatTaken;
-
-    } catch(error) {
-        console.log(error.message)
-        return false;
-    }
-}
-
+    const occupiedSeats = showData.occupiedSeats || {};
+    return !selectedSeats.some(seat => occupiedSeats[seat]);
+  } catch (error) {
+    console.log(error.message);
+    return false;
+  }
+};
 
 export const createBooking = async (req, res) => {
-    try{
-        const {userId} = req.auth();
-        const {showId, selectedSeats} = req.body;
-        const {origin} = req.headers;
+    try {
+        const { userId } = req;           // ← Changed from req.auth
 
-        // Check if the seat is available for the selected show
-
-        const isAvailable = await checkSeatsAvailability(showId, selectedSeats)
-
-        if(!isAvailable) {
-            return res.json({success: false, message:'Selected seats are not available.'})
+        if (!userId) {
+            return res.status(401).json({ 
+                success: false, 
+                message: "Unauthorized - Please login" 
+            });
         }
 
-    // Get the show details
-    const showData = await Show.findById(showId).populate('movie');
-    
-    // Create a new booking
-    const booking= await Booking.create({
-        user: userId,
-        show: showId,
-        amount: showData.showPrice * selectedSeats.length,
-        bookedSeats: selectedSeats
-    })
+        const { showId, selectedSeats } = req.body;
 
-    selectedSeats.map((seat)=> {
-        showData.occupiedSeats[seat] = userId;
-    })
+        if (!showId || !selectedSeats?.length) {
+            return res.status(400).json({ 
+                success: false, 
+                message: "Show ID and seats are required" 
+            });
+        }
 
-    showData.markModified('occupiedSeats');
+        const isAvailable = await checkSeatsAvailability(showId, selectedSeats);
+        if (!isAvailable) {
+            return res.json({ success: false, message: 'Selected seats are not available.' });
+        }
 
-    await showData.save();
+        const showData = await Show.findById(showId).populate('movie');
+        if (!showData) {
+            return res.status(404).json({ success: false, message: "Show not found" });
+        }
 
-    // Stripe Gateway Initialize
+        const booking = await Booking.create({
+            user: userId,
+            show: showId,
+            amount: showData.showPrice * selectedSeats.length,
+            bookedSeats: selectedSeats
+        });
 
-    res.json({success: true, message: 'Booked Successfully'})
+        selectedSeats.forEach(seat => {
+            showData.occupiedSeats[seat] = userId;
+        });
 
-    } catch(error) {
-        console.log(error.message)
-        res.json({success:false, message:error.message})
+        showData.markModified('occupiedSeats');
+        await showData.save();
 
-    }
-
-}
-
-export const getOccupiedSeats = async (req, res) => {
-    try{
-        const {showId} = req.params;
-        const showData = await Show.findById(showId)
-        const occupiedSeats = Object.keys(showData.occupiedSeats)
-
-        res.json({success:true, occupiedSeats})
+        res.json({ success: true, message: 'Booked Successfully' });
 
     } catch (error) {
-        console.log(error.message);
-        res.json({success:true, message: error.message})
-
-
+        console.error("Booking Error:", error);
+        res.status(500).json({ success: false, message: error.message });
     }
-}
+};
+
+export const getOccupiedSeats = async (req, res) => {
+  try {
+    const { showId } = req.params;
+    const showData = await Show.findById(showId);
+
+    if (!showData) {
+      return res.status(404).json({ success: false, message: "Show not found" });
+    }
+
+    const occupiedSeats = Object.keys(showData.occupiedSeats || {});
+
+    res.json({ success: true, occupiedSeats });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
