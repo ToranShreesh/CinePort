@@ -6,20 +6,36 @@ import Movie from "../models/Movie.js";
 // API Controller Function to Get User Bookings
 export const getUserBookings = async (req, res) => {
     try {
-        const user = req.auth().userId;
+        // Correct way with Clerk Express
+        const userId = req.auth?.userId || req.userId;   // Support both patterns
 
-        const bookings = await Booking.find({user}).populate({
-            path: "show",
-            populate: {path:"movie"}
-        }).sort({createdAt: -1})
-        res.json({success: true, bookings})
+        if (!userId) {
+            return res.status(401).json({ 
+                success: false, 
+                message: "Unauthorized - Please login" 
+            });
+        }
+
+        const bookings = await Booking.find({ user: userId })
+            .populate({
+                path: "show",
+                populate: { path: "movie" }
+            })
+            .sort({ createdAt: -1 });
+
+        res.json({ 
+            success: true, 
+            bookings: bookings || [] 
+        });
         
     } catch (error) {
-        console.error(error.message);
-        res.json({success: false, message:error.message});
-        
+        console.error("Get Bookings Error:", error);
+        res.status(500).json({ 
+            success: false, 
+            message: error.message 
+        });
     }
-}
+};
 
 // API Controller Function to Update Favorite Movie in Clerk User Metadata
 export const updateFavorite = async (req, res) => {

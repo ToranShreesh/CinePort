@@ -41,11 +41,11 @@ export const addShow = async (req, res) => {
         overview: movieApiData.overview, 
         poster_path: movieApiData.poster_path,
         backdrop_path: movieApiData.backdrop_path,
+        genres: movieApiData.genres,
+        casts: movieCreditsData.casts,
         release_date: movieApiData.release_date,
         original_language: movieApiData.original_language,
         tagline: movieApiData.tagline || "",
-        genres: movieApiData.genres,
-        casts: movieApiData.casts,
         vote_average: movieApiData.vote_average,
         runtime: movieApiData.runtime
         }

@@ -15,15 +15,7 @@ const MovieDetails = () => {
   const [isFavorited, setIsFavorited] = useState(false)   // Local state for instant & stable UI
 
   const navigate = useNavigate()
-  const { 
-    shows, 
-    axios, 
-    getToken, 
-    user, 
-    fetchFavoriteMovies, 
-    favoriteMovies, 
-    image_base_url 
-  } = useAppContext()
+  const {shows, axios, getToken, user, fetchFavoriteMovies, favoriteMovies, image_base_url} = useAppContext()
 
   // Sync local state with context when favoriteMovies changes
   useEffect(() => {
@@ -36,9 +28,10 @@ const MovieDetails = () => {
   const getShow = async () => {
     try {
       const { data } = await axios.get(`/api/show/${id}`)
-      if (data.success) setShow(data)
+      if (data.success) 
+        setShow(data)
     } catch (error) {
-      console.error(error)
+      console.log(error)
     }
   }
 
@@ -124,17 +117,7 @@ const MovieDetails = () => {
       </div>
 
       {/* Rest of your JSX remains the same */}
-      <p className='text-lg font-medium mt-20'>Your Favourite Cast</p>
-      <div className='overflow-x-auto no-scrollbar mt-8 pb-4'>
-        <div className='flex items-center gap-4 w-max px-4'>
-          {show.movie.casts.slice(0,12).map((cast,index)=>(
-            <div key={index} className='flex flex-col item-center text-center'>
-              <img src={image_base_url + cast.profile_path} alt=''className='rounded-full h-20 md:h-20 aspect-square object-cover'/>
-              <p className='font-medium text-xs mt-3'>{cast.name}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      
 
       <DateSelect dateTime={show.dateTime} id={id}/>
 

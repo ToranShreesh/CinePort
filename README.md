@@ -239,4 +239,19 @@
 - Improved overall booking workflow and user experience
 - Completed end-to-end movie ticket booking functionality from seat selection to booking history
 
+### Day 22
+
+- Installed and configured Stripe for payment processing
+- Set up Stripe account and generated API keys (STRIPE_PUBLISHABLE_KEY and STRIPE_SECRET_KEY)
+- Integrated Stripe backend APIs for payment intent creation and confirmation
+- Implemented secure payment flow for movie ticket booking system
+- Integrated Stripe payment flow into frontend checkout process
+- Connected booking flow with Stripe payment verification
+- Tested complete payment workflow successfully from frontend to backend
+- Ensured secure handling of payment data using environment variables
+- Verified successful booking creation after payment completion
+- Completed end-to-end payment integration for movie booking system
+- Installed and configured Svix for webhook/event handling support
+
+
 
