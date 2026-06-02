@@ -253,5 +253,15 @@
 - Completed end-to-end payment integration for movie booking system
 - Installed and configured Svix for webhook/event handling support
 
+### Day 23
+
+- Configured Stripe webhook endpoint in the Stripe Dashboard.
+- Added Stripe webhook secret key to environment variables.
+- Created Stripe webhook controller for event verification and processing.
+- Implemented payment success handling to update booking payment status.
+- Added Stripe webhook route using raw body parsing middleware.
+- Tested webhook integration and verified successful booking updates after payment.
+
+
 
 
