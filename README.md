@@ -261,6 +261,15 @@
 - Implemented payment success handling to update booking payment status.
 - Added Stripe webhook route using raw body parsing middleware.
 - Tested webhook integration and verified successful booking updates after payment.
+- Implemented payment verification flow with Stripe integration.
+- Updated My Bookings page to display the Pay Now button only for unpaid bookings.
+- Added functionality to redirect users to Stripe when retrying failed or pending payments.
+- Improved booking status handling after successful payments.
+- Integrated Inngest scheduler for automated payment status checks.
+- Created a background job to cancel unpaid bookings after 10 minutes.
+- Implemented seat release functionality for expired unpaid bookings.
+- Triggered Inngest events on booking creation to schedule payment verification.
+
 
 
 
