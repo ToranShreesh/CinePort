@@ -202,7 +202,6 @@
 - Completed major admin panel functionalities for movie booking management system
 
 ### Day 20
-
 - Integrated Home Page with backend movie show data
 - Displayed Now Showing movies dynamically based on shows added by admins
 - Fetched active movie shows from backend APIs and MongoDB database
@@ -222,7 +221,6 @@
 - Completed end-to-end favourite movie workflow including frontend, backend, and database integration
 
 ### Day 21
-
 - Completed My Bookings Page with frontend and backend integration
 - Fetched and displayed user booking history dynamically from backend APIs
 - Displayed booked movie details, show information, selected seats, and booking records
@@ -240,7 +238,6 @@
 - Completed end-to-end movie ticket booking functionality from seat selection to booking history
 
 ### Day 22
-
 - Installed and configured Stripe for payment processing
 - Set up Stripe account and generated API keys (STRIPE_PUBLISHABLE_KEY and STRIPE_SECRET_KEY)
 - Integrated Stripe backend APIs for payment intent creation and confirmation
@@ -254,7 +251,6 @@
 - Installed and configured Svix for webhook/event handling support
 
 ### Day 23
-
 - Configured Stripe webhook endpoint in the Stripe Dashboard.
 - Added Stripe webhook secret key to environment variables.
 - Created Stripe webhook controller for event verification and processing.
@@ -270,6 +266,14 @@
 - Implemented seat release functionality for expired unpaid bookings.
 - Triggered Inngest events on booking creation to schedule payment verification.
 
+### Day 24
+- Installed and configured Nodemailer for email services.
+- Created and configured SMTP email account credentials.
+- Added Nodemailer setup in the config folder with reusable email utility functions.
+- Configured environment variables for SMTP authentication and sender email.
+- Integrated Brevo SMTP service for email delivery.
+- Created an Inngest function to send email notifications when users book a show.
+- Tested email service integration and booking notification workflow.
 
 
 
