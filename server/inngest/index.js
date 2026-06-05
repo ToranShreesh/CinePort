@@ -92,37 +92,47 @@ const releaseSeatsAndDeleteBooking = inngest.createFunction(
     }
 );
 
-// Inngest Function to send email when user books a show
+// inngest/index.js
 const sendBookingConfirmationEmail = inngest.createFunction(
     {
         id: "send-booking-confirmation-email",
-        triggers: [{ event: "app/show.booked" }]     // ← Fixed: Moved to triggers
+        triggers: [{ event: "app/show.booked" }]
     },
-    async ({ event, step }) => {
+    async ({ event }) => {                    // step not needed here
         const { bookingId } = event.data;
 
-        const booking = await Booking.findById(bookingId).populate({
-            path: 'show',
-            populate: { path: "movie", model: "Movie" }
-        }).populate('user');
+        const booking = await Booking.findById(bookingId)
+            .populate({
+                path: 'show',
+                populate: { path: "movie", model: "Movie" }
+            })
+            .populate('user');
+
+        if (!booking || !booking.user?.email) {
+            console.error("Booking or user email not found");
+            return;
+        }
+
+        const showDateTime = new Date(booking.show.showDateTime);
+        const dateStr = showDateTime.toLocaleDateString('en-US', { timeZone: 'Asia/Kathmandu' });
+        const timeStr = showDateTime.toLocaleTimeString('en-US', { timeZone: 'Asia/Kathmandu' });
 
         await sendEmail({
             to: booking.user.email,
             subject: `Payment Confirmation: "${booking.show.movie.title}" booked!`,
             body: `<div style="font-family: Arial, sans-serif; line-height: 1.5;">
-                   <h2>Hi ${booking.user.name},</h2>
-                   <p>Your booking for <strong style="color: #F84565">"${booking.show.movie.title}"</strong> is confirmed.</p>
-                   <p>
-                        <strong>Date:</strong> $(new Date(booking.show.showDateTime).toLocaleDateString('en-US',{
-                        timeZone: 'Asia/Kathmandu'}))<br/>
-                        <strong>Time:</strong> $(new Date(booking.show.showDateTime).toLocaleTimeString('en-US',{
-                        timeZone: 'Asia/Kathmandu'}))
-                   </p>
-                   <p>Enjoy the show! 🍿</p>
-                   <p>Thanks for booking with us!<br/>- CinePort Team</p>
-                   </div>`
-        })
+                <h2>Hi ${booking.user.name},</h2>
+                <p>Your booking for <strong style="color: #F84565">"${booking.show.movie.title}"</strong> is confirmed.</p>
+                <p>
+                    <strong>Date:</strong> ${dateStr}<br/>
+                    <strong>Time:</strong> ${timeStr}
+                </p>
+                <p>Enjoy the show! 🍿</p>
+                <p>Thanks for booking with us!<br/>- CinePort Team</p>
+            </div>`
+        });
 
+        console.log(`✅ Confirmation email sent for booking ${bookingId}`);
     }
 );
 
