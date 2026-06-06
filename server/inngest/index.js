@@ -206,6 +206,6 @@ export const functions = [
     syncUserUpdation,
     releaseSeatsAndDeleteBooking,
     sendBookingConfirmationEmail,
-    sendShowRemainders,
+    sendShowReminders,
     sendNewShowNotification
 ];
