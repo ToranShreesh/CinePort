@@ -140,13 +140,13 @@ const sendShowReminders = inngest.createFunction(
             return tasks;
         });
 
-        if (remainderTasks.length === 0) {
+        if (reminderTasks.length === 0) {
             return { sent: 0, message: "No reminders to send" };
         }
 
         const results = await step.run('send-all-reminders', async () => {
             return await Promise.allSettled(
-                remainderTasks.map(task => 
+                reminderTasks.map(task => 
                     sendEmail({
                         to: task.userEmail,
                         subject: `Reminder: Your movie "${task.movieTitle}" starts soon!`,
