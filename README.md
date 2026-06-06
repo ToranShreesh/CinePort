@@ -274,6 +274,12 @@
 - Integrated Brevo SMTP service for email delivery.
 - Created an Inngest function to send email notifications when users book a show.
 - Tested email service integration and booking notification workflow.
+- Created an Inngest function to send notifications when a new show is added.
+- Implemented an Inngest reminder function for scheduled notifications.
+- Integrated Inngest event triggering in the show controller.
+- Passed movie title data through the event payload for notification processing.
+- Tested event flow and notification functionality.
+
 
 
 
